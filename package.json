@@ -5,6 +5,8 @@
   "dependencies": {
     "@babel/core": "7.6.0",
     "@svgr/webpack": "4.3.2",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
     "babel-eslint": "10.0.3",
@@ -15,6 +17,7 @@
     "camelcase": "^5.2.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "css-loader": "2.1.1",
+    "cypress": "^3.6.1",
     "dotenv": "6.2.0",
     "dotenv-expand": "5.1.0",
     "enzyme": "^3.10.0",
@@ -65,7 +68,9 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "test:enzyme": "jest ./src/enzyme --watch --setupFilesAfterEnv='./src/enzyme/setupTests.js'"
+    "test:enzyme": "jest src/enzyme --watch --setupFilesAfterEnv='./src/enzyme/setupTests.js'",
+    "test:testing-library": "jest src/testing-library --watch --setupFilesAfterEnv='./src/testing-library/setupTests.js'",
+    "test:cypress":"cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
