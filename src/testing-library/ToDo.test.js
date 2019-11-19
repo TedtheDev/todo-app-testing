@@ -1,42 +1,17 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import App from '../App';
+import ToDo from '../components/ToDo';
 
 describe('<ToDo/>', () => {
-    let app;
+    let todo;
 
     beforeEach(() => {
-        app = render(<App />);
-    })
-
-    it('should render correctly', () => {
-        const { getByTestId } = app;
-
-        expect(getByTestId('todo-input')).toBeInTheDocument();
-    })
-
-    it('renders two default todo items', () => {
-        const { getByText } = app;
-
-        expect(getByText("clean the house")).toBeInTheDocument();
-        expect(getByText("buy milk")).toBeInTheDocument();
-    });
-
-    it('has an input field', () => {
-        const { getByTestId } = app;
-
-        expect(getByTestId('todo-input')).toBeInTheDocument();
-    })
-
-    it('has an add button', () => {
-        const { getByTestId } = app;
-
-        expect(getByTestId('add').textContent).toBe('+');
+        todo = render(<ToDo />);
     })
 
     describe('Adding items', () => {
         it('when add button pressed, if input is empty, prevent item from being added', () => {
-            const { getByTestId } = app;
+            const { getByTestId } = todo;
 
             window.alert = jest.fn();
 
@@ -45,7 +20,7 @@ describe('<ToDo/>', () => {
         })
 
         it('when add button pressed, if input has text, created todo item', () => {
-            const { getByTestId, getByText } = app;
+            const { getByTestId, getByText } = todo;
 
             fireEvent.change(getByTestId('todo-input'), { target : { value: 'Create more tests'}});
             expect(getByTestId('todo-input').value).toBe('Create more tests');
@@ -57,7 +32,7 @@ describe('<ToDo/>', () => {
 
     describe("Deleting items", () => {
         it("When the delete button is pressed for the first todo item, it removes the entire item", () => {
-          const { queryAllByTestId } = app;
+          const { queryAllByTestId } = todo;
           const deleteButtons = queryAllByTestId("delete");
           expect(queryAllByTestId("todo-item").length).toBe(2);
           
@@ -66,7 +41,7 @@ describe('<ToDo/>', () => {
         });
         
         it("means that because the first toDoItem was deleted, the first toDoItem should now be buy milk", () => {
-          const { queryAllByTestId, queryByTestId } = app;
+          const { queryAllByTestId, queryByTestId } = todo;
           const deleteButtons = queryAllByTestId("delete");
           
           fireEvent.click(deleteButtons[0]);
